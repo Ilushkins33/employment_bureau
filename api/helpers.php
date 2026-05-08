@@ -122,6 +122,57 @@ function initSchema(PDO $db): void {
             created_at     TEXT NOT NULL DEFAULT (datetime('now'))
         );
     ");
+
+        // Seed: создаём демо-аккаунты если таблица пустая
+    $count = $db->query('SELECT COUNT(*) FROM users')->fetchColumn();
+    if ((int)$count === 0) {
+        seedDemo($db);
+    }
+}
+
+function seedDemo(PDO $db): void {
+    $users = [
+        ['admin@bureau.ru',    'Admin123!',    Role::ADMIN,    'Иван',    'Петров',   null,          null],
+        ['employer@demo.ru',   'Employer123!', Role::EMPLOYER, 'Анна',    'Смирнова', '+79001234567', 'ООО «ТехноГрупп»'],
+        ['applicant@demo.ru',  'Applicant123!',Role::APPLICANT,'Дмитрий', 'Козлов',   '+79007654321', null],
+    ];
+
+    $stmt = $db->prepare(
+        'INSERT INTO users (email,password,role,first_name,last_name,phone,company) VALUES (?,?,?,?,?,?,?)'
+    );
+    foreach ($users as $u) {
+        $stmt->execute([$u[0], password_hash($u[1], PASSWORD_BCRYPT), $u[2], $u[3], $u[4], $u[5], $u[6]]);
+    }
+
+    $employerId = 2;
+    $vacancies = [
+        [$employerId, 'PHP-разработчик',      'Разработка и поддержка веб-приложений на PHP/Laravel.',         80000, 120000, 'Иркутск',  'IT',          '1-3 года',    'full'],
+        [$employerId, 'Frontend-разработчик', 'Вёрстка и разработка интерфейсов на HTML/CSS/JavaScript.',      70000, 100000, 'Иркутск',  'IT',          'до 1 года',   'remote'],
+        [$employerId, 'Менеджер по продажам', 'Активные продажи, работа с клиентской базой.',                   50000,  80000, 'Иркутск',  'Продажи',     '1-3 года',    'full'],
+        [$employerId, 'Бухгалтер',            'Ведение бухгалтерского учёта, подготовка отчётности.',           55000,  75000, 'Иркутск',  'Финансы',     '3-5 лет',     'full'],
+        [$employerId, 'UX/UI дизайнер',       'Проектирование интерфейсов, подготовка макетов в Figma.',        65000,  95000, 'Иркутск',  'Дизайн',      '1-3 года',    'remote'],
+    ];
+
+    $stmt = $db->prepare(
+        'INSERT INTO vacancies (employer_id,title,description,salary_from,salary_to,location,category,experience,employment) VALUES (?,?,?,?,?,?,?,?,?)'
+    );
+    foreach ($vacancies as $v) {
+        $stmt->execute($v);
+    }
+
+    $applicantId = 3;
+    $db->prepare(
+        'INSERT INTO resumes (applicant_id,title,description,skills,experience,education,salary_from,location) VALUES (?,?,?,?,?,?,?,?)'
+    )->execute([
+        $applicantId,
+        'PHP / JavaScript разработчик',
+        'Занимаюсь веб-разработкой более 2 лет. Опыт работы с Laravel, Vue.js, REST API.',
+        '["PHP","JavaScript","Laravel","Vue.js","MySQL","Git"]',
+        '2 года в ООО «ВебСтудия» — разработка корпоративных сайтов и API',
+        'ИРНИТУ, Информационные системы, 2022',
+        70000,
+        'Иркутск',
+    ]);
 }
 
 // ── Ответы ────────────────────────────────────────────────────────────────────
