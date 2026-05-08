@@ -1,0 +1,26 @@
+/* analytics.html styles */
+
+#nav-auth {
+  display: none;
+  align-items: center;
+  gap: 8px;
+}
+
+.analytics-header {
+  margin-bottom: 24px;
+}
+
+.analytics-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+.analytics-grid .section__title {
+  font-size: 16px;
+}
+
+.analytics-grid .card {
+  padding: 0;
+}

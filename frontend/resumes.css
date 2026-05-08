@@ -1,0 +1,26 @@
+/* resumes.html styles */
+
+#nav-auth {
+  display: none;
+  align-items: center;
+  gap: 8px;
+}
+
+.resumes-header {
+  margin-bottom: 20px;
+}
+
+.filters__field--grow {
+  flex: 1;
+  min-width: 200px;
+}
+
+.filters__field--city,
+.filters__field--skill,
+.filters__field--salary {
+  width: 130px;
+}
+
+.modal--resume {
+  max-width: 680px;
+}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Резюме — Бюро по трудоустройству</title>
+  <link rel="stylesheet" href="shared.css">
+  <link rel="stylesheet" href="resumes.css">
+</head>
+<body>
+<nav class="navbar">
+  <div class="navbar__inner">
+    <a href="index.html" class="navbar__brand">Бюро <span>по трудоустройству</span></a>
+    <a href="vacancies.html" class="navbar__link">Вакансии</a>
+    <div id="nav-auth">
+      <a href="resumes.html"   class="navbar__link active" data-role="admin,employer">Резюме</a>
+      <a href="search.html"    class="navbar__link" data-role="admin,employer">Поиск</a>
+      <a href="analytics.html" class="navbar__link" data-role="admin">Аналитика</a>
+      <div class="navbar__sep"></div>
+      <a href="dashboard.html" class="navbar__link">
+        <div class="navbar__user">
+          <div class="navbar__avatar" id="nav-avatar">?</div>
+          <span id="nav-name"></span>
+        </div>
+      </a>
+      <button id="btn-logout" class="btn btn--ghost btn--sm">Выйти</button>
+    </div>
+  </div>
+</nav>
+
+<main class="page">
+  <div class="section__header resumes-header">
+    <h1 class="section__title">База резюме</h1>
+    <span id="res-count" class="text-sm text-2"></span>
+  </div>
+
+  <!-- Фильтры -->
+  <div class="filters">
+    <div class="filters__field filters__field--grow">
+      <label class="filters__label">Поиск</label>
+      <input type="text" id="f-q" class="input" placeholder="Должность, навык, описание…">
+    </div>
+    <div class="filters__field">
+      <label class="filters__label">Город</label>
+      <input type="text" id="f-location" class="input filters__field--city" placeholder="Иркутск">
+    </div>
+    <div class="filters__field">
+      <label class="filters__label">Навык</label>
+      <input type="text" id="f-skill" class="input filters__field--skill" placeholder="PHP, Excel…">
+    </div>
+    <div class="filters__field">
+      <label class="filters__label">Зарплата до (₽)</label>
+      <input type="number" id="f-salary" class="input filters__field--salary" placeholder="100000">
+    </div>
+    <button class="btn btn--primary" onclick="loadResumes()">Найти</button>
+    <button class="btn btn--ghost"   onclick="resetFilters()">Сбросить</button>
+  </div>
+
+  <div id="resumes-list"></div>
+</main>
+
+<!-- Модал: просмотр резюме -->
+<div class="modal-overlay hidden" id="modal-resume">
+  <div class="modal modal--resume">
+    <div class="modal__head">
+      <span class="modal__title">Резюме соискателя</span>
+      <button class="modal__close" data-modal-close="modal-resume">×</button>
+    </div>
+    <div class="modal__body" id="modal-resume-body"></div>
+    <div class="modal__foot">
+      <button class="btn btn--ghost" data-modal-close="modal-resume">Закрыть</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast-container"></div>
+<script src="shared.js"></script>
+<script src="resumes.js"></script>
+</body>
+</html>

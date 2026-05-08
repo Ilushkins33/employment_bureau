@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Личный кабинет — Бюро по трудоустройству</title>
+  <link rel="stylesheet" href="shared.css">
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+<nav class="navbar">
+  <div class="navbar__inner">
+    <a href="index.html" class="navbar__brand">Бюро <span>по трудоустройству</span></a>
+    <a href="vacancies.html" class="navbar__link">Вакансии</a>
+    <div id="nav-auth">
+      <a href="resumes.html"   class="navbar__link" data-role="admin,employer">Резюме</a>
+      <a href="search.html"    class="navbar__link" data-role="admin,employer">Поиск</a>
+      <a href="analytics.html" class="navbar__link" data-role="admin">Аналитика</a>
+      <div class="navbar__sep"></div>
+      <div class="navbar__user">
+        <div class="navbar__avatar" id="nav-avatar">?</div>
+        <span id="nav-name"></span>
+      </div>
+      <button id="btn-logout" class="btn btn--ghost btn--sm">Выйти</button>
+    </div>
+  </div>
+</nav>
+
+<main class="page">
+  <div id="dashboard-content"><div class="loader"><div class="spinner"></div>Загрузка…</div></div>
+</main>
+
+<!-- Модал: создать/редактировать вакансию -->
+<div class="modal-overlay hidden" id="modal-vacancy">
+  <div class="modal">
+    <div class="modal__head">
+      <span class="modal__title" id="modal-vacancy-title">Новая вакансия</span>
+      <button class="modal__close" data-modal-close="modal-vacancy">×</button>
+    </div>
+    <div class="modal__body">
+      <input type="hidden" id="vac-id">
+      <div class="form__group">
+        <label class="form__label">Название <span class="form__required">*</span></label>
+        <input type="text" id="vac-title" class="input" placeholder="PHP-разработчик">
+      </div>
+      <div class="form__group">
+        <label class="form__label">Описание <span class="form__required">*</span></label>
+        <textarea id="vac-desc" class="textarea" rows="4" placeholder="Обязанности, требования…"></textarea>
+      </div>
+      <div class="form__row">
+        <div class="form__group">
+          <label class="form__label">Зарплата от (₽)</label>
+          <input type="number" id="vac-sal-from" class="input" placeholder="50000">
+        </div>
+        <div class="form__group">
+          <label class="form__label">Зарплата до (₽)</label>
+          <input type="number" id="vac-sal-to" class="input" placeholder="100000">
+        </div>
+      </div>
+      <div class="form__row">
+        <div class="form__group">
+          <label class="form__label">Город</label>
+          <input type="text" id="vac-location" class="input" placeholder="Иркутск">
+        </div>
+        <div class="form__group">
+          <label class="form__label">Категория</label>
+          <input type="text" id="vac-category" class="input" placeholder="IT, Финансы…">
+        </div>
+      </div>
+      <div class="form__row">
+        <div class="form__group">
+          <label class="form__label">Опыт</label>
+          <select id="vac-exp" class="select">
+            <option value="">Не важно</option>
+            <option value="без опыта">Без опыта</option>
+            <option value="до 1 года">До 1 года</option>
+            <option value="1-3 года">1–3 года</option>
+            <option value="3-5 лет">3–5 лет</option>
+            <option value="5+ лет">5+ лет</option>
+          </select>
+        </div>
+        <div class="form__group">
+          <label class="form__label">Тип занятости</label>
+          <select id="vac-employment" class="select">
+            <option value="">Не указано</option>
+            <option value="full">Полная</option>
+            <option value="part">Частичная</option>
+            <option value="remote">Удалённо</option>
+            <option value="contract">Контракт</option>
+          </select>
+        </div>
+      </div>
+      <div class="form__group">
+        <label class="form__label">Статус</label>
+        <select id="vac-status" class="select">
+          <option value="open">Открыта</option>
+          <option value="draft">Черновик</option>
+          <option value="closed">Закрыта</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal__foot">
+      <button class="btn btn--ghost" data-modal-close="modal-vacancy">Отмена</button>
+      <button class="btn btn--primary" onclick="saveVacancy()">Сохранить</button>
+    </div>
+  </div>
+</div>
+
+<!-- Модал: создать/редактировать резюме -->
+<div class="modal-overlay hidden" id="modal-resume">
+  <div class="modal">
+    <div class="modal__head">
+      <span class="modal__title" id="modal-resume-title">Новое резюме</span>
+      <button class="modal__close" data-modal-close="modal-resume">×</button>
+    </div>
+    <div class="modal__body">
+      <input type="hidden" id="res-id">
+      <div class="form__group">
+        <label class="form__label">Желаемая должность <span class="form__required">*</span></label>
+        <input type="text" id="res-title" class="input" placeholder="PHP-разработчик">
+      </div>
+      <div class="form__group">
+        <label class="form__label">О себе <span class="form__required">*</span></label>
+        <textarea id="res-desc" class="textarea" rows="3" placeholder="Кратко о себе, ключевые компетенции…"></textarea>
+      </div>
+      <div class="form__group">
+        <label class="form__label">Навыки</label>
+        <div class="skills-input" id="skills-wrap"></div>
+        <input type="hidden" id="res-skills" value="[]">
+        <div class="form__hint">Введите навык и нажмите Enter или запятую</div>
+      </div>
+      <div class="form__group">
+        <label class="form__label">Опыт работы</label>
+        <textarea id="res-exp" class="textarea" rows="2" placeholder="2 года в ООО «Компания» — должность"></textarea>
+      </div>
+      <div class="form__group">
+        <label class="form__label">Образование</label>
+        <input type="text" id="res-edu" class="input" placeholder="ИРНИТУ, Информационные системы, 2022">
+      </div>
+      <div class="form__row">
+        <div class="form__group">
+          <label class="form__label">Желаемая зарплата (₽)</label>
+          <input type="number" id="res-salary" class="input" placeholder="70000">
+        </div>
+        <div class="form__group">
+          <label class="form__label">Город</label>
+          <input type="text" id="res-location" class="input" placeholder="Иркутск">
+        </div>
+      </div>
+      <div class="form__group">
+        <label class="form__label">Видимость</label>
+        <select id="res-status" class="select">
+          <option value="active">Активно (видно работодателям)</option>
+          <option value="hidden">Скрыто</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal__foot">
+      <button class="btn btn--ghost" data-modal-close="modal-resume">Отмена</button>
+      <button class="btn btn--primary" onclick="saveResume()">Сохранить</button>
+    </div>
+  </div>
+</div>
+
+<!-- Модал: откликнуться на вакансию -->
+<div class="modal-overlay hidden" id="modal-apply">
+  <div class="modal">
+    <div class="modal__head">
+      <span class="modal__title">Откликнуться на вакансию</span>
+      <button class="modal__close" data-modal-close="modal-apply">×</button>
+    </div>
+    <div class="modal__body">
+      <input type="hidden" id="apply-vacancy-id">
+      <p id="apply-vacancy-name" class="fw-600 mb-16"></p>
+      <div class="form__group">
+        <label class="form__label">Резюме</label>
+        <select id="apply-resume" class="select">
+          <option value="">— Без резюме —</option>
+        </select>
+      </div>
+      <div class="form__group">
+        <label class="form__label">Сопроводительное письмо</label>
+        <textarea id="apply-letter" class="textarea" rows="4" placeholder="Расскажите, почему вы подходите на эту позицию…"></textarea>
+      </div>
+    </div>
+    <div class="modal__foot">
+      <button class="btn btn--ghost" data-modal-close="modal-apply">Отмена</button>
+      <button class="btn btn--primary" onclick="submitApply()">Отправить отклик</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast-container"></div>
+<script src="shared.js"></script>
+<script src="dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Аналитика — Бюро по трудоустройству</title>
+  <link rel="stylesheet" href="shared.css">
+  <link rel="stylesheet" href="analytics.css">
+</head>
+<body>
+<nav class="navbar">
+  <div class="navbar__inner">
+    <a href="index.html" class="navbar__brand">Бюро <span>по трудоустройству</span></a>
+    <a href="vacancies.html" class="navbar__link">Вакансии</a>
+    <div id="nav-auth">
+      <a href="resumes.html"   class="navbar__link" data-role="admin,employer">Резюме</a>
+      <a href="search.html"    class="navbar__link" data-role="admin,employer">Поиск</a>
+      <a href="analytics.html" class="navbar__link active" data-role="admin">Аналитика</a>
+      <div class="navbar__sep"></div>
+      <a href="dashboard.html" class="navbar__link">
+        <div class="navbar__user">
+          <div class="navbar__avatar" id="nav-avatar">?</div>
+          <span id="nav-name"></span>
+        </div>
+      </a>
+      <button id="btn-logout" class="btn btn--ghost btn--sm">Выйти</button>
+    </div>
+  </div>
+</nav>
+
+<main class="page">
+  <div class="section__header analytics-header">
+    <h1 class="section__title">Аналитика и отчётность</h1>
+    <button class="btn btn--outline btn--sm" onclick="loadAll()">🔄 Обновить</button>
+  </div>
+
+  <!-- Общая сводка -->
+  <div id="summary-stats" class="stats-grid"></div>
+
+  <div class="analytics-grid">
+
+    <!-- Вакансии по категориям -->
+    <section class="section">
+      <div class="section__header"><h2 class="section__title">Вакансии по категориям</h2></div>
+      <div class="card">
+        <div id="by-category"><div class="loader"><div class="spinner"></div></div></div>
+      </div>
+    </section>
+
+    <!-- Вакансии по городам -->
+    <section class="section">
+      <div class="section__header"><h2 class="section__title">Вакансии по городам</h2></div>
+      <div class="card">
+        <div id="by-location"><div class="loader"><div class="spinner"></div></div></div>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="analytics-grid">
+
+    <!-- Топ работодателей -->
+    <section class="section">
+      <div class="section__header"><h2 class="section__title">Топ работодателей</h2></div>
+      <div id="top-employers"><div class="loader"><div class="spinner"></div></div></div>
+    </section>
+
+    <!-- Отклики по статусам -->
+    <section class="section">
+      <div class="section__header"><h2 class="section__title">Отклики по статусам</h2></div>
+      <div id="apps-status"><div class="loader"><div class="spinner"></div></div></div>
+    </section>
+
+  </div>
+
+  <!-- Последние отклики -->
+  <section class="section">
+    <div class="section__header"><h2 class="section__title">Последние отклики</h2></div>
+    <div id="recent-apps"><div class="loader"><div class="spinner"></div></div></div>
+  </section>
+
+</main>
+
+<div id="toast-container"></div>
+<script src="shared.js"></script>
+<script src="analytics.js"></script>
+</body>
+</html>

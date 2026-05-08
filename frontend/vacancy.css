@@ -1,0 +1,22 @@
+/* vacancy.html styles */
+
+#nav-guest {
+  display: none;
+  align-items: center;
+  gap: 6px;
+}
+
+#nav-auth {
+  display: none;
+  align-items: center;
+  gap: 8px;
+}
+
+.vacancy-page {
+  max-width: 860px;
+}
+
+.back-link {
+  display: inline-flex;
+  margin-bottom: 16px;
+}

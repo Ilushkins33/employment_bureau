@@ -1,0 +1,83 @@
+/* search.html styles */
+
+#nav-auth {
+  display: none;
+  align-items: center;
+  gap: 8px;
+}
+
+.search-title {
+  margin-bottom: 20px;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  border-bottom: 1px solid var(--clr-border);
+  margin-bottom: 20px;
+}
+
+.tab-btn {
+  padding: 8px 20px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--clr-text-2);
+  border-bottom: 2px solid transparent;
+  transition: all .15s;
+}
+
+.tab-btn.active {
+  color: var(--clr-primary);
+  border-bottom-color: var(--clr-primary);
+}
+
+/* Filters */
+.filters__field--grow {
+  flex: 1;
+  min-width: 200px;
+}
+
+.filters__field--city,
+.filters__field--skill {
+  width: 130px;
+}
+
+.filters__field--salary-sm {
+  width: 120px;
+}
+
+/* Match tab */
+.match-select-card {
+  margin-bottom: 20px;
+  max-width: 500px;
+}
+
+.match-select-card__label {
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+/* Match score bar */
+.match-bar {
+  height: 8px;
+  background: var(--clr-border);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 6px;
+}
+
+.match-bar__fill {
+  height: 100%;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #2196f3, #1e3a5f);
+  transition: width .4s ease;
+}
+
+.match-score {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--clr-primary);
+}

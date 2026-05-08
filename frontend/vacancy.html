@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Вакансия — Бюро по трудоустройству</title>
+  <link rel="stylesheet" href="shared.css">
+  <link rel="stylesheet" href="vacancy.css">
+</head>
+<body>
+<nav class="navbar">
+  <div class="navbar__inner">
+    <a href="index.html" class="navbar__brand">Бюро <span>по трудоустройству</span></a>
+    <a href="vacancies.html" class="navbar__link">Вакансии</a>
+    <div id="nav-guest">
+      <a href="login.html"    class="navbar__link">Войти</a>
+      <a href="register.html" class="btn btn--accent btn--sm">Регистрация</a>
+    </div>
+    <div id="nav-auth">
+      <a href="resumes.html"   class="navbar__link" data-role="admin,employer">Резюме</a>
+      <a href="search.html"    class="navbar__link" data-role="admin,employer">Поиск</a>
+      <a href="analytics.html" class="navbar__link" data-role="admin">Аналитика</a>
+      <div class="navbar__sep"></div>
+      <a href="dashboard.html" class="navbar__link">
+        <div class="navbar__user">
+          <div class="navbar__avatar" id="nav-avatar">?</div>
+          <span id="nav-name"></span>
+        </div>
+      </a>
+      <button id="btn-logout" class="btn btn--ghost btn--sm">Выйти</button>
+    </div>
+  </div>
+</nav>
+
+<main class="page vacancy-page">
+  <a href="vacancies.html" class="btn btn--ghost btn--sm back-link">← Назад к вакансиям</a>
+  <div id="vacancy-content"><div class="loader"><div class="spinner"></div>Загрузка…</div></div>
+</main>
+
+<!-- Модал: отклик -->
+<div class="modal-overlay hidden" id="modal-apply">
+  <div class="modal">
+    <div class="modal__head">
+      <span class="modal__title">Откликнуться</span>
+      <button class="modal__close" data-modal-close="modal-apply">×</button>
+    </div>
+    <div class="modal__body">
+      <input type="hidden" id="apply-vid">
+      <p id="apply-vname" class="fw-600 mb-16"></p>
+      <div class="form__group">
+        <label class="form__label">Резюме</label>
+        <select id="apply-resume" class="select">
+          <option value="">— Без резюме —</option>
+        </select>
+      </div>
+      <div class="form__group">
+        <label class="form__label">Сопроводительное письмо</label>
+        <textarea id="apply-letter" class="textarea" rows="5"
+          placeholder="Расскажите, почему вы подходите на эту позицию. Это увеличит шансы быть замеченным."></textarea>
+        <div class="form__hint">Не обязательно, но рекомендуется</div>
+      </div>
+    </div>
+    <div class="modal__foot">
+      <button class="btn btn--ghost" data-modal-close="modal-apply">Отмена</button>
+      <button class="btn btn--primary" onclick="submitApply()">Отправить отклик</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast-container"></div>
+<script src="shared.js"></script>
+<script src="vacancy.js"></script>
+</body>
+</html>

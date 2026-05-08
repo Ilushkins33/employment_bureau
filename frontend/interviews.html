@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Собеседования — Бюро по трудоустройству</title>
+  <link rel="stylesheet" href="shared.css">
+  <link rel="stylesheet" href="interviews.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="navbar__inner">
+    <a href="index.html" class="navbar__brand">Бюро <span>по трудоустройству</span></a>
+    <a href="vacancies.html" class="navbar__link">Вакансии</a>
+    <div id="nav-guest">
+      <a href="login.html"    class="navbar__link">Войти</a>
+      <a href="register.html" class="btn btn--accent btn--sm">Регистрация</a>
+    </div>
+    <div id="nav-auth">
+      <a href="resumes.html"     class="navbar__link" data-role="admin,employer">Резюме</a>
+      <a href="search.html"      class="navbar__link" data-role="admin,employer">Поиск</a>
+      <a href="interviews.html"  class="navbar__link" data-role="admin,employer,applicant">Собеседования</a>
+      <a href="analytics.html"   class="navbar__link" data-role="admin">Аналитика</a>
+      <div class="navbar__sep"></div>
+      <a href="dashboard.html" class="navbar__link">
+        <div class="navbar__user">
+          <div class="navbar__avatar" id="nav-avatar">?</div>
+          <span id="nav-name"></span>
+        </div>
+      </a>
+      <button id="btn-logout" class="btn btn--ghost btn--sm">Выйти</button>
+    </div>
+  </div>
+</nav>
+
+<main class="page">
+  <div class="section__header interviews-header">
+    <h1 class="section__title">Собеседования</h1>
+    <div class="interviews-filter-row">
+      <select id="filter-status" class="input input--sm">
+        <option value="">Все статусы</option>
+        <option value="scheduled">Запланировано</option>
+        <option value="completed">Состоялось</option>
+        <option value="cancelled">Отменено</option>
+      </select>
+    </div>
+  </div>
+
+  <div id="interviews-list"></div>
+</main>
+
+<!-- Модальное окно: назначить собеседование -->
+<div id="modal-schedule" class="modal">
+  <div class="modal__overlay" onclick="closeModal()"></div>
+  <div class="modal__box">
+    <div class="modal__header">
+      <h3 class="modal__title">Назначить собеседование</h3>
+      <button class="modal__close" onclick="closeModal()">×</button>
+    </div>
+    <form id="form-schedule" onsubmit="submitSchedule(event)">
+      <input type="hidden" id="f-application-id">
+      <div class="form-group">
+        <label class="form-label">Дата и время</label>
+        <input type="datetime-local" id="f-scheduled-at" class="input" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Формат</label>
+        <select id="f-format" class="input">
+          <option value="office">Офис</option>
+          <option value="online">Онлайн</option>
+          <option value="phone">Телефон</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Место / ссылка</label>
+        <input type="text" id="f-location" class="input" placeholder="Адрес офиса или ссылка на встречу">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Примечания</label>
+        <textarea id="f-notes" class="input" rows="3" placeholder="Дополнительная информация для кандидата"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn--ghost" onclick="closeModal()">Отмена</button>
+        <button type="submit" class="btn btn--accent">Назначить</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Модальное окно: редактировать статус -->
+<div id="modal-update" class="modal">
+  <div class="modal__overlay" onclick="closeUpdateModal()"></div>
+  <div class="modal__box">
+    <div class="modal__header">
+      <h3 class="modal__title">Изменить собеседование</h3>
+      <button class="modal__close" onclick="closeUpdateModal()">×</button>
+    </div>
+    <form id="form-update" onsubmit="submitUpdate(event)">
+      <input type="hidden" id="u-id">
+      <div class="form-group">
+        <label class="form-label">Статус</label>
+        <select id="u-status" class="input">
+          <option value="scheduled">Запланировано</option>
+          <option value="completed">Состоялось</option>
+          <option value="cancelled">Отменено</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Дата и время</label>
+        <input type="datetime-local" id="u-scheduled-at" class="input" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Место / ссылка</label>
+        <input type="text" id="u-location" class="input">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Примечания</label>
+        <textarea id="u-notes" class="input" rows="3"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn--ghost" onclick="closeUpdateModal()">Отмена</button>
+        <button type="submit" class="btn btn--accent">Сохранить</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="toast-container"></div>
+<script src="shared.js"></script>
+<script src="interviews.js"></script>
+</body>
+</html>

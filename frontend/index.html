@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Бюро по трудоустройству</title>
+  <link rel="stylesheet" href="shared.css">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="navbar__inner">
+    <a href="index.html" class="navbar__brand">Бюро <span>по трудоустройству</span></a>
+    <a href="vacancies.html" class="navbar__link">Вакансии</a>
+    <div id="nav-guest">
+      <a href="login.html"    class="navbar__link">Войти</a>
+      <a href="register.html" class="btn btn--accent btn--sm">Регистрация</a>
+    </div>
+    <div id="nav-auth">
+      <a href="resumes.html"   class="navbar__link" data-role="admin,employer">Резюме</a>
+      <a href="search.html"    class="navbar__link" data-role="admin,employer">Поиск</a>
+      <a href="analytics.html" class="navbar__link" data-role="admin">Аналитика</a>
+      <div class="navbar__sep"></div>
+      <a href="dashboard.html" class="navbar__link">
+        <div class="navbar__user">
+          <div class="navbar__avatar" id="nav-avatar">?</div>
+          <span id="nav-name"></span>
+        </div>
+      </a>
+      <button id="btn-logout" class="btn btn--ghost btn--sm">Выйти</button>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <h1>Найдите работу мечты<br>или идеального кандидата</h1>
+  <p>Бюро по трудоустройству — платформа, объединяющая соискателей и работодателей Иркутска</p>
+  <div class="hero__search">
+    <input type="text" id="hero-q" placeholder="Должность, компания, ключевые слова…">
+    <button class="btn btn--accent btn--lg" onclick="heroSearch()">Найти</button>
+  </div>
+</section>
+
+<!-- Контент -->
+<main class="page">
+
+  <!-- Статистика -->
+  <div id="stats-row" class="stats-grid"></div>
+
+  <!-- Последние вакансии -->
+  <section class="section">
+    <div class="section__header">
+      <h2 class="section__title">Актуальные вакансии</h2>
+      <a href="vacancies.html" class="btn btn--outline btn--sm">Все вакансии</a>
+    </div>
+    <div id="vacancies-list" class="grid"></div>
+  </section>
+
+</main>
+
+<div id="toast-container"></div>
+<script src="shared.js"></script>
+<script src="index.js"></script>
+</body>
+</html>

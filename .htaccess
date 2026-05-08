@@ -1,0 +1,9 @@
+Options -Indexes
+RewriteEngine On
+
+# Разрешаем прямые обращения к существующим файлам
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^ - [L]
+
+# Передаём Authorization header в PHP
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]

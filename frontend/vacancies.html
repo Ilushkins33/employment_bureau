@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Вакансии — Бюро по трудоустройству</title>
+  <link rel="stylesheet" href="shared.css">
+  <link rel="stylesheet" href="vacancies.css">
+</head>
+<body>
+<nav class="navbar">
+  <div class="navbar__inner">
+    <a href="index.html" class="navbar__brand">Бюро <span>по трудоустройству</span></a>
+    <a href="vacancies.html" class="navbar__link active">Вакансии</a>
+    <div id="nav-guest">
+      <a href="login.html"    class="navbar__link">Войти</a>
+      <a href="register.html" class="btn btn--accent btn--sm">Регистрация</a>
+    </div>
+    <div id="nav-auth">
+      <a href="resumes.html"   class="navbar__link" data-role="admin,employer">Резюме</a>
+      <a href="search.html"    class="navbar__link" data-role="admin,employer">Поиск</a>
+      <a href="analytics.html" class="navbar__link" data-role="admin">Аналитика</a>
+      <div class="navbar__sep"></div>
+      <a href="dashboard.html" class="navbar__link">
+        <div class="navbar__user">
+          <div class="navbar__avatar" id="nav-avatar">?</div>
+          <span id="nav-name"></span>
+        </div>
+      </a>
+      <button id="btn-logout" class="btn btn--ghost btn--sm">Выйти</button>
+    </div>
+  </div>
+</nav>
+
+<main class="page">
+  <div class="section__header vacancies-header">
+    <h1 class="section__title">Вакансии</h1>
+    <span id="vac-count" class="text-sm text-2"></span>
+  </div>
+
+  <!-- Фильтры -->
+  <div class="filters">
+    <div class="filters__field filters__field--grow">
+      <label class="filters__label">Поиск</label>
+      <input type="text" id="f-q" class="input" placeholder="Должность, навык…">
+    </div>
+    <div class="filters__field">
+      <label class="filters__label">Категория</label>
+      <select id="f-category" class="select">
+        <option value="">Все</option>
+        <option>IT</option><option>Продажи</option><option>Финансы</option>
+        <option>Дизайн</option><option>Маркетинг</option><option>Юриспруденция</option>
+        <option>Медицина</option><option>Образование</option><option>Производство</option>
+      </select>
+    </div>
+    <div class="filters__field">
+      <label class="filters__label">Занятость</label>
+      <select id="f-employment" class="select">
+        <option value="">Любая</option>
+        <option value="full">Полная</option>
+        <option value="part">Частичная</option>
+        <option value="remote">Удалённо</option>
+        <option value="contract">Контракт</option>
+      </select>
+    </div>
+    <div class="filters__field">
+      <label class="filters__label">Опыт</label>
+      <select id="f-experience" class="select">
+        <option value="">Любой</option>
+        <option value="без опыта">Без опыта</option>
+        <option value="до 1 года">До 1 года</option>
+        <option value="1-3 года">1–3 года</option>
+        <option value="3-5 лет">3–5 лет</option>
+        <option value="5+ лет">5+ лет</option>
+      </select>
+    </div>
+    <div class="filters__field">
+      <label class="filters__label">Зарплата от (₽)</label>
+      <input type="number" id="f-salary" class="input filters__field--salary" placeholder="50000">
+    </div>
+    <div class="filters__field">
+      <label class="filters__label">Город</label>
+      <input type="text" id="f-location" class="input filters__field--city" placeholder="Иркутск">
+    </div>
+    <button class="btn btn--primary" onclick="loadVacancies()">Найти</button>
+    <button class="btn btn--ghost"   onclick="resetFilters()">Сбросить</button>
+  </div>
+
+  <div id="vacancies-list" class="grid"></div>
+</main>
+
+<div id="toast-container"></div>
+<script src="shared.js"></script>
+<script src="vacancies.js"></script>
+</body>
+</html>

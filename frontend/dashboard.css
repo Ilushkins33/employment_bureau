@@ -1,0 +1,7 @@
+/* dashboard.html styles */
+
+#nav-auth {
+  display: none;
+  align-items: center;
+  gap: 8px;
+}

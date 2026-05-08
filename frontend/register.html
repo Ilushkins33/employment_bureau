@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Регистрация — Бюро по трудоустройству</title>
+  <link rel="stylesheet" href="shared.css">
+  <link rel="stylesheet" href="register.css">
+</head>
+<body>
+<nav class="navbar">
+  <div class="navbar__inner">
+    <a href="index.html" class="navbar__brand">Бюро <span>по трудоустройству</span></a>
+  </div>
+</nav>
+
+<main class="page page--narrow page--register">
+  <div class="auth-box">
+    <div class="auth-box__title">Регистрация</div>
+    <div class="auth-box__sub">Создайте аккаунт для работы с системой</div>
+
+    <!-- Выбор роли -->
+    <div class="form__group">
+      <label class="form__label">Я регистрируюсь как <span class="form__required">*</span></label>
+      <div class="role-buttons">
+        <button class="btn btn--outline btn--full role-btn active" data-role="applicant" onclick="setRole('applicant')">👤 Соискатель</button>
+        <button class="btn btn--outline btn--full role-btn"        data-role="employer"  onclick="setRole('employer')">🏢 Работодатель</button>
+      </div>
+      <input type="hidden" id="role" value="applicant">
+    </div>
+
+    <div class="form__row">
+      <div class="form__group">
+        <label class="form__label">Имя <span class="form__required">*</span></label>
+        <input type="text" id="first_name" class="input" placeholder="Иван">
+      </div>
+      <div class="form__group">
+        <label class="form__label">Фамилия <span class="form__required">*</span></label>
+        <input type="text" id="last_name" class="input" placeholder="Петров">
+      </div>
+    </div>
+
+    <div class="form__group">
+      <label class="form__label">Email <span class="form__required">*</span></label>
+      <input type="email" id="email" class="input" placeholder="example@mail.ru">
+    </div>
+
+    <div class="form__group" id="company-field">
+      <label class="form__label">Название компании</label>
+      <input type="text" id="company" class="input" placeholder='ООО «Название»'>
+    </div>
+
+    <div class="form__group">
+      <label class="form__label">Телефон</label>
+      <input type="tel" id="phone" class="input" placeholder="+7 900 000-00-00">
+    </div>
+
+    <div class="form__row">
+      <div class="form__group">
+        <label class="form__label">Пароль <span class="form__required">*</span></label>
+        <input type="password" id="password" class="input" placeholder="Мин. 8 символов">
+      </div>
+      <div class="form__group">
+        <label class="form__label">Повторите пароль <span class="form__required">*</span></label>
+        <input type="password" id="password2" class="input" placeholder="Повторите пароль">
+      </div>
+    </div>
+
+    <div id="err-msg" class="text-danger text-sm mb-8"></div>
+
+    <button class="btn btn--primary btn--full btn--lg" onclick="doRegister()">Зарегистрироваться</button>
+
+    <div class="auth-divider">или</div>
+    <div class="auth-link-row">
+      Уже есть аккаунт? <a href="login.html">Войти</a>
+    </div>
+  </div>
+</main>
+
+<div id="toast-container"></div>
+<script src="shared.js"></script>
+<script src="auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+/* register.html styles */
+
+.page--register {
+  padding-top: 40px;
+}
+
+.role-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+#company-field {
+  display: none;
+}
+
+#err-msg {
+  display: none;
+}
+
+.auth-link-row {
+  text-align: center;
+  font-size: 13.5px;
+  color: var(--clr-text-2);
+}

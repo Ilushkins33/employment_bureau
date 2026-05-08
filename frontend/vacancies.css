@@ -1,0 +1,27 @@
+/* vacancies.html styles */
+
+#nav-guest {
+  display: none;
+  align-items: center;
+  gap: 6px;
+}
+
+#nav-auth {
+  display: none;
+  align-items: center;
+  gap: 8px;
+}
+
+.vacancies-header {
+  margin-bottom: 20px;
+}
+
+.filters__field--grow {
+  flex: 1;
+  min-width: 200px;
+}
+
+.filters__field--salary,
+.filters__field--city {
+  width: 120px;
+}

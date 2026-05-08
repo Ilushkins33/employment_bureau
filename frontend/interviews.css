@@ -1,0 +1,38 @@
+/* interviews.html styles */
+
+#nav-guest {
+  display: none;
+  align-items: center;
+  gap: 6px;
+}
+
+#nav-auth {
+  display: none;
+  align-items: center;
+  gap: 8px;
+}
+
+.interviews-header {
+  margin-bottom: 24px;
+}
+
+.interviews-filter-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+#filter-status {
+  width: 160px;
+}
+
+.modal {
+  display: none;
+}
+
+.modal-footer {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 16px;
+}

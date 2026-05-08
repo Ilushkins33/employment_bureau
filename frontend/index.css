@@ -1,0 +1,17 @@
+/* index.html styles */
+
+#nav-guest {
+  display: none;
+  align-items: center;
+  gap: 6px;
+}
+
+#nav-auth {
+  display: none;
+  align-items: center;
+  gap: 8px;
+}
+
+#stats-row {
+  margin-bottom: 32px;
+}
